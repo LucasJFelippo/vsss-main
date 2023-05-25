@@ -1,0 +1,5 @@
+API developed in Python 3.8 or latest versions.
+
+Packages used:
+    socket
+    protobuf 3.20
