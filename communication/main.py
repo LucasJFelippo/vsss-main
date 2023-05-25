@@ -1,8 +1,11 @@
-from communication.classes.communication import Communication
+import threading
+import time
+
 from communication.classes.environment import Env
 
 
-test = Env()
-test.buildEnv()
+env = Env()
 
-test.ball.replace(0, 0, 0, 0)
+def runEnv():
+    env.buildEnv()
+    time.sleep(0.016)

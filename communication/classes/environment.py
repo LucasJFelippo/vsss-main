@@ -23,6 +23,8 @@ class Env():
         ball = environment.frame.ball
         self.ball = BallF(ball.x, ball.y, ball.z)
 
+        if self.robots:
+            self.robots = []
         for rob in environment.frame.robots_yellow:
             robot = RobotF(id = rob.robot_id, team = True, x = rob.x, y = rob.y, orientation = rob.orientation, vx = rob.vx, vy = rob.vy, vorientation = rob.vorientation)
             self.robots.append(robot)
