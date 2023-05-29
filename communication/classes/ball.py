@@ -10,6 +10,9 @@ class BallF():
         self.y = y
         self.z = z
 
+    def __str__(self) -> str:
+        return "Ball:\n   X: {x:.2f}\n   Y: {y:.2f}\n   Z: {z:.2f}".format(x = self.x, y = self.y, z = self.z)
+
     def replace(self, x = 0, y = 0, vx = 0, vy = 0):
         comm = Communication(Communication(ports["visionAddress"], ports["visionPort"], ports["refereeAddress"], ports["refereePort"], ports["firaAddress"], ports["firaPort"]))
         packet = Packet()

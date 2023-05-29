@@ -17,6 +17,10 @@ class RobotF():
         self.vy = vy
         self.vorientation = vorientation
 
+    def __str__(self) -> str:
+        color = "Yellow" if self.team == True else "Blue"
+        return "Robot {color} {id}:\n   x: {x:.2f}\n   y: {y:.2f}\n   orientation: {orientation:.2f}\n   vx: {vx:.2f}\n   vy: {vy:.2f}\n   Vorientation: {vorientation:.2f}".format(color = color, id = self.id, x = self.x, y = self.y, orientation = self.orientation, vx = self.vx, vy = self.vy, vorientation = self.vorientation)
+
     def on(self, left, right) -> None:
         comm = Communication(Communication(ports["visionAddress"], ports["visionPort"], ports["refereeAddress"], ports["refereePort"], ports["firaAddress"], ports["firaPort"]))
         packet = Packet()

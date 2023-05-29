@@ -13,6 +13,15 @@ class Env():
         self.robots = []
         self.field = None
 
+    def __str__(self) -> str:
+        if self.ball:
+            text = ""
+            text = text + self.ball.__str__()
+            for robot in self.robots:
+                text = text + robot.__str__()
+            text = text + self.field.__str__()
+            return text
+
     def buildEnv(self) -> None:
         comm = Communication(ports["visionAddress"], ports["visionPort"], ports["refereeAddress"], ports["refereePort"], ports["firaAddress"], ports["firaPort"])
         data = comm.visionReceive()
