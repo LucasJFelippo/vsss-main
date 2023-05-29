@@ -46,7 +46,7 @@ git clone https://github.com/lucasdefelippe/vsss-main
  ```
 
 # Enviando comandos
- Para enviar comandos, você pode chamar os *method* do próprio objeto que deseja manipular *\(assim como mostrado na linha 9 do arquivo `main.py`\)*. Os metodos de cada *class* são:
+ Para enviar comandos, você pode chamar os *method* do próprio objeto que deseja manipular *\(assim como mostrado na linha 11 do arquivo `main.py`\)*. Os metodos de cada *class* são:
 
  ```
     BallF.replace(x, y, vx = 0, vy = 0)
