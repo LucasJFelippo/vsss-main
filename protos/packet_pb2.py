@@ -11,9 +11,9 @@ from google.protobuf import symbol_database as _symbol_database
 _sym_db = _symbol_database.Default()
 
 
-import communication.proto_py.command_pb2 as command__pb2
-import communication.proto_py.replacement_pb2 as replacement__pb2
-import communication.proto_py.common_pb2 as common__pb2
+from protos import command_pb2 as command__pb2
+from protos import replacement_pb2 as replacement__pb2
+from protos import common_pb2 as common__pb2
 
 
 DESCRIPTOR = _descriptor.FileDescriptor(

@@ -1,17 +1,9 @@
-import time
+from lib import FIRASim , Team
 
-from communication.main import Env
+fira = FIRASim()
 
+while True:
+    robot = fira.robot(Team.BLUE, 1)
+    ball = fira.ball()
 
-env = Env()
-env.buildEnv()
-
-print(env)
-
-env.ball.replace(0.5, 0.5, 10, 20)
-
-robot1 = env.robots[0]
-print(robot1.x)
-robot1.on(5, 5)
-time.sleep(2)
-print(robot1.x)
+    print(ball.x, ball.y)
