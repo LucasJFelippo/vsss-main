@@ -1,7 +1,7 @@
-import threading
-import time
+from lib import FIRASim
 
-from communication.classes.environment import Env
+fira = FIRASim()
 
-
-env = Env()
+while True:
+    data = fira.env()
+    print(data)
