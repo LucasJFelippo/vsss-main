@@ -2,7 +2,7 @@
 
 ### Instalação
 ```sh
-pip install git+https://github.com/fbot-furg/vsss_api.git
+pip install git+https://github.com/LucasMartinsUthi/vsss-client.git
 ```
 
 #### Exemplo de Uso
