@@ -2,7 +2,14 @@
 import socket
 import configparser
 import os
+
+from enum import Enum
+
 from protos import packet_pb2 as packet
+
+class Team(Enum):
+    BLUE = False
+    YELLOW = True
 
 class SingletonMeta(type):
     _instances = {}
@@ -50,6 +57,24 @@ class FIRASim(metaclass=SingletonMeta):
         env = packet.Environment()
         env.ParseFromString(data)
         return env
+    
+    def frame(self):
+        return self.env().frame
+    
+    def ball(self):
+        return self.frame().ball
+    
+    def robots(self):
+        return self.frame().robots_blue
+    
+    def robot(self, team: Team, id: int):
+        if team:
+            return self.frame().robots_blue[id]
+        else:
+            return self.frame().robots_yellow[id]
+        
+    def ball(self):
+        return self.frame().ball    
     
 # class Referee(metaclass=SingletonMeta):
 # class SSLVision(metaclass=SingletonMeta):

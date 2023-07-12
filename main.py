@@ -1,7 +1,9 @@
-from lib import FIRASim
+from lib import FIRASim , Team
 
 fira = FIRASim()
 
 while True:
-    data = fira.env()
-    print(data)
+    robot = fira.robot(Team.BLUE, 1)
+    ball = fira.ball()
+
+    print(ball.x, ball.y)
