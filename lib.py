@@ -2,7 +2,6 @@
 import socket
 import configparser
 import os
-import struct
 
 from enum import Enum
 from typing import List
