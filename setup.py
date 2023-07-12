@@ -4,8 +4,8 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="vsss-client",
-    version="0.0.4",
+    name="vsss_client",
+    version="0.0.5",
     author="LLucas de Felippe & Lucas Martins",
     author_email="luscagbr@gmail.com",
     description="A client for VSSS",
