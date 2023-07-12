@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="vsss_client",
-    version="0.0.5",
+    version="0.0.7",
     author="LLucas de Felippe & Lucas Martins",
     author_email="luscagbr@gmail.com",
     description="A client for VSSS",
@@ -15,6 +15,7 @@ setuptools.setup(
     packages=setuptools.find_packages(),
     install_requires=[
         "configparser",
+        "protocolbuffers",
     ],
     classifiers=[
         "Programming Language :: Python :: 3",
