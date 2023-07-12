@@ -2,14 +2,32 @@
 import socket
 import configparser
 import os
+import struct
 
 from enum import Enum
+from typing import List
 
 from protos import packet_pb2 as packet
+from protos import command_pb2 as command
 
 class Team(Enum):
     BLUE = False
     YELLOW = True
+
+class Command:
+    def __init__(self, team: Team, id: int, wheel_left: int, wheel_right: int):
+        self.team = team
+        self.id = id
+        self.wheel_left = wheel_left
+        self.wheel_right = wheel_right
+
+    def to_proto(self):
+        cmd = command.Command()
+        cmd.id = self.id
+        cmd.yellowteam = self.team.value
+        cmd.wheel_left = self.wheel_left
+        cmd.wheel_right = self.wheel_right
+        return cmd
 
 class SingletonMeta(type):
     _instances = {}
@@ -31,15 +49,9 @@ class FIRASim(metaclass=SingletonMeta):
         self.command_address = str(config['FIRA']['command_address'])
         self.command_port = int(config['FIRA']['command_port'])
 
-        # create multicast socket for vision
         self.vision_sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         self.vision_sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         self.vision_sock.bind((self.vision_address, self.vision_port))
-
-        # create unicast socket for commands
-        # self.command_sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-        # self.command_sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-        # self.command_sock.bind((self.command_address, self.command_port))
 
     def receive(self):
         data, addr = self.vision_sock.recvfrom(2048)
@@ -74,7 +86,22 @@ class FIRASim(metaclass=SingletonMeta):
             return self.frame().robots_yellow[id]
         
     def ball(self):
-        return self.frame().ball    
+        return self.frame().ball 
     
+    def send_command(self, cmds: List[Command]):
+        sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        sock.connect((self.command_address, self.command_port))
+
+        robot_cmd = command.Commands()
+
+        for cmd in cmds:
+            robot_cmd.robot_commands.append(cmd.to_proto())
+
+        package = packet.Packet()
+        package.cmd.CopyFrom(robot_cmd)
+
+        sock.send(package.SerializeToString())
+        sock.close()
+            
 # class Referee(metaclass=SingletonMeta):
 # class SSLVision(metaclass=SingletonMeta):
