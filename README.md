@@ -7,7 +7,7 @@ pip install git+https://github.com/LucasMartinsUthi/vsss-client.git
 
 #### Exemplo de Uso
 ```py
-from lib import FIRASim , Team, Command
+from vsss_client import FIRASim, Command, Team
 
 fira = FIRASim()
 
@@ -23,13 +23,24 @@ while True:
 ```
 
 ### Arquivo de Configuração
+É possivel criar um arquivo de configuração e alterar os endereços e portas do simulador
+
 `config.ini`
 ```ini
+# Arquivo de configuração padrão
 [FIRA]
 vision_address = 224.0.0.1
 vision_port = 10002
 command_address = 127.0.0.1
 command_port = 20011
+```
+
+Expecifique o arquivo de configuração ao instanciar o simulador
+
+```py
+from vsss_client import FIRASim
+
+fira = FIRASim("config.ini")
 ```
 
 ### Regerando Protos / Ubuntu
@@ -41,6 +52,6 @@ protoc --version #Garanta que a versão seja 3+
 
 Compilando protos
 ```sh
-protoc -I=./protos --python_out=./protos ./protos/*.proto
+protoc -I=./protos --python_out=./vsss_client ./protos/*.proto
 ```
 

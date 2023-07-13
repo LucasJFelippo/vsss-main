@@ -6,8 +6,8 @@ import os
 from enum import Enum
 from typing import List
 
-from protos import packet_pb2 as packet
-from protos import command_pb2 as command
+from vsss_client import packet_pb2 as packet
+from vsss_client import command_pb2 as command
 
 class Team(Enum):
     BLUE = False
@@ -38,11 +38,14 @@ class SingletonMeta(type):
         return cls._instances[cls]
 
 class FIRASim(metaclass=SingletonMeta):
-    def __init__(self):
+    def __init__(self, config_path: str = None):
         config = configparser.ConfigParser()
-        config_file = os.path.join(os.path.dirname(__file__), 'config.ini')
-        config.read(config_file)
+        if config_path is None:
+            config_path = os.path.join(os.path.dirname(__file__), 'config.ini')
 
+        print(config_path)
+        config.read(config_path)
+        
         self.vision_address = str(config['FIRA']['vision_address'])
         self.vision_port = int(config['FIRA']['vision_port'])
         self.command_address = str(config['FIRA']['command_address'])
