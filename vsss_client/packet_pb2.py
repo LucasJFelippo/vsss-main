@@ -11,9 +11,9 @@ from google.protobuf import symbol_database as _symbol_database
 _sym_db = _symbol_database.Default()
 
 
-from protos import command_pb2 as command__pb2
-from protos import replacement_pb2 as replacement__pb2
-from protos import common_pb2 as common__pb2
+from vsss_client import command_pb2 as command__pb2
+from vsss_client import replacement_pb2 as replacement__pb2
+from vsss_client import common_pb2 as common__pb2
 
 
 DESCRIPTOR = _descriptor.FileDescriptor(
